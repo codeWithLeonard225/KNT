@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import CashierPage from "./Cashier/CashierPage"; // create this next if not yet
 import Cincout from "./Cincout/Cincout"; // create this next if not yet
 import MobileMoneyPage from "./MobileMoneyPage/MobileMoneyPage"; // create this next if not yet
+import BranchReceipts from "./BranchReceipts/BranchReceipts"; // create this next if not yet
 
 // --- Sidebar navigation items ---
 const NAV_ITEMS = [
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { key: "records", label: "New Record", icon: <MdAttachMoney /> },
   { key: "Cincout", label: "Cashin CashOut", icon: <MdAttachMoney /> },
   { key: "MobileMoneyPage", label: "Mobile Money Page", icon: <MdAttachMoney /> },
+  { key: "BranchReceipts", label: "BranchReceipts", icon: <MdHistory /> },
   { key: "history", label: "Today Records", icon: <MdHistory /> },
 ];
 
@@ -104,9 +106,11 @@ export default function CashierDashboard() {
         return <Cincout/>;
       case "MobileMoneyPage":
         return <MobileMoneyPage/>;
+      case "BranchReceipts":
+        return <BranchReceipts/>;
 
-      case "history":
-        return <CashierRecords mode="view" />;
+      // case "history":
+      //   return <CashierRecords mode="view" />;
 
       default:
         return null;

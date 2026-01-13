@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import RegisterStaffPage from "./staffReg/RegisterStaffPage";
 import BranchManagement from "./Branch/BranchManagement";
 import OwnerLoginHistory from "./OwnerLoginHistory/OwnerLoginHistory";
+import Loan from "./LoanManagement/Loan/Loan";
+import BranchAllocation from "./LoanManagement/BranchAllocation/BranchAllocation";
 
 
 
@@ -17,7 +19,8 @@ const NAV_ITEMS = [
   { key: "staffReg", label: "Staff Reg", icon: <MdDashboard /> },
   { key: "approvals", label: "Approvals", icon: <MdAssignmentTurnedIn /> },
   { key: "rates", label: "Rates", icon: <MdAttachMoney /> },
-  { key: "loans", label: "Loans", icon: <MdLibraryBooks /> },
+  { key: "Loan", label: "Loan", icon: <MdLibraryBooks /> },
+  // { key: "BranchAllocation", label: "BranchAllocation", icon: <MdLibraryBooks /> },
   { key: "BranchManagement", label: "BranchManagement", icon: <MdLibraryBooks /> },
   { key: "OwnerLoginHistory", label: "Attendance", icon: <MdLibraryBooks /> },
 ];
@@ -126,9 +129,11 @@ export default function OwnerDashboard() {
       case "approvals":
         return <div>ApprovalsPage</div>;
       case "rates":
-        return <div>RatesPage</div>;
-      case "loans":
-        return <div>loans</div>;
+        return <div>RatesPage</div>
+      case "Loan":
+        return <Loan/>;
+      case "BranchAllocation":
+        return <BranchAllocation/>;
       case "BranchManagement":
         return <BranchManagement/>;
       case "OwnerLoginHistory":
