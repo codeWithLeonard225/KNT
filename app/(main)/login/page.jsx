@@ -15,6 +15,8 @@ export default function LoginPage() {
   const [userName, setUserName] = useState("");
   const [error, setError] = useState("");
   const [showId, setShowId] = useState(false);
+  const [loading, setLoading] = useState(false);
+
 
   const collectionsToCheck = [
     { name: "owners", idField: "ownerId", nameField: "ownerName", role: "owner", route: "/owner" },
@@ -25,7 +27,13 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
+  
+
+    
+  if (loading) return; // ⛔ prevent double click
+
+  setError("");
+  setLoading(true); // 🔄 start loading
 
     const id = userId.trim();
     const name = userName.trim().toLowerCase();
@@ -72,6 +80,7 @@ export default function LoginPage() {
 
       if (!foundUser) {
         setError("Invalid ID or Name");
+         setLoading(false);
         return;
       }
 
@@ -84,6 +93,7 @@ export default function LoginPage() {
     } catch (err) {
       console.error("Login error:", err);
       setError("System error. Please try again.");
+         setLoading(false);
     }
   };
 
@@ -134,12 +144,26 @@ export default function LoginPage() {
             </div>
           )}
 
-          <button
-            type="submit"
-            className="w-full py-4 rounded-2xl font-black text-white bg-indigo-600 hover:bg-indigo-700 active:scale-95 transition-all shadow-xl shadow-indigo-100 uppercase tracking-widest"
-          >
-            Access Dashboard
-          </button>
+        <button
+  type="submit"
+  disabled={loading}
+  className={`w-full py-4 rounded-2xl font-black text-white uppercase tracking-widest
+    transition-all shadow-xl
+    ${loading
+      ? "bg-indigo-400 cursor-not-allowed"
+      : "bg-indigo-600 hover:bg-indigo-700 active:scale-95 shadow-indigo-100"
+    }`}
+>
+  {loading ? (
+    <span className="flex items-center justify-center gap-3">
+      <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+      Authenticating...
+    </span>
+  ) : (
+    "Access Dashboard"
+  )}
+</button>
+
         </form>
 
         <p className="mt-10 text-center text-[10px] text-slate-300 font-bold uppercase tracking-widest">
